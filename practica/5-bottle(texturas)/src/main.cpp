@@ -49,6 +49,10 @@ std::vector<glm::vec2> generateTextureCoordinatesForBottle(const std::vector<glm
 		auto theta = atan2(z,x);
 		auto rho = (x + z)/(glm::cos(theta) + glm::sin(theta));
 		
+		if(theta > 2*3.141592f || theta < -2*3.141592f){
+			theta = 0;
+		}
+		
 		auto s = (-theta)/(3.14159265359) + 1;
 		auto t = (-y + 0.25)/0.4;
 		

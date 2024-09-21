@@ -46,8 +46,19 @@ def generate_texture_coordinates_cylindrical(vertices):
     for point in vertices:
         x, y, z = point
         theta = math.atan2(z, x)  # Ángulo en el plano xy
+        if theta < 0:
+            theta += 2 * math.pi
+            
         s = (-theta) / (2 * math.pi) + 0.5  # Coordenada de textura s
         t = (y + 1) / 2  # Coordenada de textura t (suponiendo que y varía de -1 a 1)
+        
+        if t > 1:
+            t = 1
+        
+        if s > 1:
+            s = 1
+            
+        
         newpoints.append([s, t])
     return np.array(newpoints, dtype=np.float32)
 
